@@ -7,7 +7,9 @@ FLAGS := -Wall -Werror -Wextra -g3
 LIB_FOLDER=lib
 LIBFT_FOLDER=libft
 ##############################################################################
-SRC=	main.c
+SRC=	main.c	\
+		t_stack.c	\
+		instructions.c
 
 OBJ=$(SRC:%.c=%.o)
 ##############################################################################
