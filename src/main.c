@@ -6,7 +6,7 @@
 /*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 08:30:32 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/09 12:32:14 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:35:52 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "../libft/libft.h"
 #include "../include/stack.h"
 #include "../include/instructions.h"
+#include "../include/order.h"
+#include "../include/colores.h"
 
 void leaks(void)
 {
@@ -28,108 +30,121 @@ void	int_print(void *elem)
 	printf("%d", *(int*)elem);
 }
 
-static int	*check_arguments(int argc, char **argv)
+int	*int_copy(int number)
 {
-	int		*array;
-	int		flag;
-	int		index;
-	int		check;
+	int	*memory;
 
-	index = 1;
-	array = (int *) malloc((argc - 1) * sizeof(int));
-	if (!array)
+	memory = (int *)malloc(sizeof(int));
+	if (!memory)
+		return (NULL);
+	*memory = number;
+	return (memory);
+}
+
+t_stack	*check_arguments(int argc, char **argv)
+{
+	int	index;
+	int *element;
+	int	flag;
+	t_stack	*head;
+	t_stack	*node;
+
+	index = 2;
+	element = int_copy(ft_strict_atoi(argv[1], &flag));
+	head = ft_stacknew(element);
+	if (!head || !element)
 		return (NULL);
 	while (index < argc)
 	{
-		array[index-1] = ft_strict_atoi(argv[index], &flag);
-		if (flag < 0)
-			return (free(array), NULL);
-		check = 0;
-		while (check < (index - 1))
-		{
-			if (array[check] == array[index - 1])
-				return (free(array), NULL);
-			check++;
-		}
+		element = int_copy(ft_strict_atoi(argv[index], &flag));
+		node = ft_stacknew(element);
+		if (!node || !element)
+			return (ft_stackclear(&head, free), NULL);
+		ft_stackadd_back(&head, node);
 		index++;
 	}
-	return (array);
+	return (head);
 }
 
-static t_stack	*get_stack(int *array, int max)
+int	is_ordered(t_stack	*stack)
 {
-	t_stack	*head;
-	t_stack	*current;
-	int		index;
-
-	index = 1;
-	head = ft_stack_create(&array[0]);
-	if (!head)
-		return (NULL);
-	current = head;
-	while (index < max)
-	{
-		current->next = ft_stack_create(&array[index]);
-		if (!current->next)
-		{
-			ft_stack_delete(&head, NULL);
-			return (NULL);
-		}
-		current = current->next;
-		index++;
-	}
-	return (head);	
-}
-
-static int	is_ordered(t_stack *head)
-{
-	int prev;
+	int	prev;
 	int current;
 
-	prev = *(int*)head->content;
-	head = head->next;
-	while (head)
+	if (!stack)
+		return (1);
+	prev = *(int*)stack->content;
+	stack = stack->next;
+	while (stack)
 	{
-		current = *(int*)head->content;
-		if (!current)
-			return (0);
+		current = *(int*)stack->content;
 		if (prev > current)
 			return (0);
-		head = head->next;
 		prev = current;
+		stack = stack->next;
 	}
 	return (1);
 }
 
-void	test(t_stack *stack)
+void test(t_stack **stack_a)
 {
-	sa
+	t_stack	*stack_b = NULL;
+
+	s(stack_a, 'a');
+	
+	p(stack_a, &stack_b, 'b');
+	p(stack_a, &stack_b, 'b');
+	p(stack_a, &stack_b, 'b');
+	
+	r(stack_a, 'a');
+	r(&stack_b, 'b');
+	
+	rr(stack_a, 'a');
+	rr(&stack_b, 'b');
+	
+	s(stack_a, 'a');
+	
+	p(&stack_b, stack_a, 'a');
+	p(&stack_b, stack_a, 'a');
+	p(&stack_b, stack_a, 'a');
+
+	ft_stack_print(*stack_a, int_print);
+	printf("\n");
+	ft_stack_print(stack_b, int_print);
+
+	is_ordered(*stack_a) == 0 ? printf("No ordenada") : printf("Ordenada");
 }
 
 int	main(int argc, char *argv[])
 {
-	int		*array;
 	t_stack	*stack;
 
 	atexit(leaks);
-
+	
 	if (argc < 2)
 		return (1);
-	array = check_arguments(argc, argv);
-	if (!array)
-		return (printf("Error.\n"), 1);
-	stack = get_stack(array, argc - 1);
+	stack = check_arguments(argc, argv);
 	if (!stack)
-		return (printf("Error con la stack :/\n"), 1);
-	ft_stack_updateindex(stack);
-	/*ft_stack_print(stack, int_print);
+		return (printf("Error.\n"), 1);
+	//ft_stack_print(stack, int_print);
+	//test(&stack);
+
+	printf("===================================\n");
+	ft_stack_print(stack, int_print);
+	printf("===================================");
+	
 	if (!is_ordered(stack))
-	{
-		//manage_order(argc, stack);
-		printf("No ordenaddo\n");
-	}
-	ft_stack_delete(&stack, NULL);
-	free(array);*/
-	test(stack);
+		manage_order(&stack, argc - 1);
+
+	printf("===================================\n");
+	ft_stack_print(stack, int_print);
+	printf("===================================\n");
+
+	if (is_ordered(stack))
+		printf("%sOrdenado%s\n", COLOR_LIGHTGREEN, COLOR_RESET);
+	else
+		printf("%sNo ordenado%s\n", COLOR_RED, COLOR_RESET);
+
+	ft_stackclear(&stack, free);
 	return (0);
 }
