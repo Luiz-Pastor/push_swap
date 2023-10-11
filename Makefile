@@ -9,7 +9,8 @@ LIBFT_FOLDER=libft
 ##############################################################################
 SRC=	main.c	\
 		t_stack.c	\
-		instructions.c
+		instructions.c \
+		order.c
 
 OBJ=$(SRC:%.c=%.o)
 ##############################################################################
@@ -17,7 +18,7 @@ OBJ=$(SRC:%.c=%.o)
 all: $(NAME)
 
 $(NAME): libft $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -Llib/ -lft
+	$(CC) $(OBJ) -o $(NAME) -Llibft/ -lft
 
 
 %.o: src/%.c
@@ -25,16 +26,16 @@ $(NAME): libft $(OBJ)
 
 libft:
 	@echo "> Compiling \'libft\'\n"
-	@cd $(LIBFT_FOLDER) ; make
+	@make -C $(LIBFT_FOLDER)
 	@cp $(LIBFT_FOLDER)/libft.a $(LIB_FOLDER)
 
 clean:
 	@rm -rf $(OBJ)
-	@cd $(LIBFT_FOLDER) ; make clean
+	@make -C $(LIBFT_FOLDER) clean
 
 fclean: clean
 	@rm -rf $(NAME)
-	@cd $(LIBFT_FOLDER) ; make fclean
+	@make -C $(LIBFT_FOLDER) fclean
 	@rm -rf lib/libft.a
 
 re: fclean $(NAME)
