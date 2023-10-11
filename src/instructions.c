@@ -1,44 +1,76 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instructions.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/11 11:23:27 by lpastor-          #+#    #+#             */
+/*   Updated: 2023/10/11 11:27:08 by lpastor-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
 #include "../include/stack.h"
 
-void	sa(t_stack	**stack)
+void	s(t_stack **stack, char letter)
 {
 	t_stack	*aux;
 
 	if (!stack || !(*stack) || !((*stack)->next))
 		return ;
+	
 	aux = (*stack)->next;
-	// Enlazamos el primero y el tercero
 	(*stack)->next = aux->next;
-	if (aux->next)
-		aux->next->prev = *stack;
-	// Enlazamos el segundo al primero
-	aux->next = *stack;
-	aux->prev = NULL;
-	(*stack)->prev = aux;
-	// Cambiamos la cabeza
+	aux->next = (*stack);
 	*stack = aux;
+	printf("s%c\n", letter);
 }
 
-void	pa(t_stack **stack_a, t_stack **stack_b)
+void	p(t_stack **origen, t_stack **dest, char letter)
 {
 	t_stack	*node;
 
-	node = ft_stack_popfront(stack_a);
-	ft_stack_addfront(stack_b, node);
+	if (!origen || !(*origen) || !dest)
+		return ;
+	node = (*origen);
+	*origen = (*origen)->next;
+
+	node->next = (*dest);
+	(*dest) = node;
+	printf("p%c\n", letter);
 }
 
-void	ra(t_stack **stack)
+void	r(t_stack **stack, char letter)
+{
+	t_stack	*node;
+	t_stack	*current;
+
+	if (!stack || !(*stack) || !(*stack)->next)
+		return ;
+
+	node = (*stack);
+	current = (*stack);
+	while (current->next)
+		current = current->next;
+	current->next = node;
+	(*stack) = (*stack)->next;
+	node->next = NULL;
+	printf("r%c\n", letter);
+}
+
+void	rr(t_stack **stack, char letter)
 {
 	t_stack	*node;
 
-	node = ft_stack_popfront(stack);
-	ft_stack_addback(stack, node);
-}
+	if (!stack ||!(*stack) || !(*stack)->next)
+		return ;
 
-void	rra(t_stack **stack)
-{
-	t_stack	*node;
-
-	node = ft_stack_popback(stack);
-	ft_stack_addfront(stack, node);
+	node = *stack;
+	while (node->next->next)
+		node = node->next;
+	node->next->next = (*stack);
+	(*stack) = node->next;
+	node->next = NULL;
+	printf("rr%c\n", letter);
 }

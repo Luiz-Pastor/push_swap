@@ -3,10 +3,10 @@
 
 # include "stack.h"
 
-void	sa(t_stack	**stack);
-void	pa(t_stack **stack_a, t_stack **stack_b);
-void	ra(t_stack **stack);
-void	rra(t_stack **stack);
+void	s(t_stack **stack, char letter);
+void	p(t_stack **origen, t_stack **dest, char letter);
+void	r(t_stack **stack, char letter);
+void	rr(t_stack **stack, char letter);
 
 
 
