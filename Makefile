@@ -9,7 +9,8 @@ LIBFT_FOLDER=libft
 ##############################################################################
 SRC=	main.c	\
 		t_stack.c	\
-		instructions.c \
+		instructions_a.c \
+		instructions_b.c \
 		order.c
 
 OBJ=$(SRC:%.c=%.o)
