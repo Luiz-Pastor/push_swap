@@ -6,7 +6,7 @@
 /*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 08:30:32 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/11 12:35:52 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/16 09:39:01 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,23 +90,23 @@ void test(t_stack **stack_a)
 {
 	t_stack	*stack_b = NULL;
 
-	s(stack_a, 'a');
+	sa(stack_a);
 	
-	p(stack_a, &stack_b, 'b');
-	p(stack_a, &stack_b, 'b');
-	p(stack_a, &stack_b, 'b');
+	pb(stack_a, &stack_b);
+	pb(stack_a, &stack_b);
+	pb(stack_a, &stack_b);
 	
-	r(stack_a, 'a');
-	r(&stack_b, 'b');
+	ra(stack_a);
+	rb(&stack_b);
 	
-	rr(stack_a, 'a');
-	rr(&stack_b, 'b');
+	rra(stack_a);
+	rrb(&stack_b);
 	
-	s(stack_a, 'a');
+	sa(stack_a);
 	
-	p(&stack_b, stack_a, 'a');
-	p(&stack_b, stack_a, 'a');
-	p(&stack_b, stack_a, 'a');
+	pa(&stack_b, stack_a);
+	pa(&stack_b, stack_a);
+	pa(&stack_b, stack_a);
 
 	ft_stack_print(*stack_a, int_print);
 	printf("\n");
@@ -131,7 +131,7 @@ int	main(int argc, char *argv[])
 
 	printf("===================================\n");
 	ft_stack_print(stack, int_print);
-	printf("===================================");
+	printf("===================================\n");
 	
 	if (!is_ordered(stack))
 		manage_order(&stack, argc - 1);
