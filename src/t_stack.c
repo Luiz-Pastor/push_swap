@@ -6,7 +6,7 @@
 /*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 08:30:32 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/11 11:42:19 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:40:22 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_stackclear(t_stack **lst, void (*del)(void*))
 	{
 		aux = current;
 		current = current->next;
-		if (del)
+		if (del && aux->content)
 			del(aux->content);
 		free(aux);
 	}
