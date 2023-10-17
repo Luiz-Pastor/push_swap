@@ -6,13 +6,38 @@
 /*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 08:07:44 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/16 09:42:24 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/17 08:13:38 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../include/stack.h"
 #include "../include/instructions.h"
+
+/*static void int_print(void *elem)
+{
+	printf("%d", *(int*)elem);
+}*/
+
+int	is_ordered(t_stack	*stack)
+{
+	int	prev;
+	int current;
+
+	if (!stack)
+		return (1);
+	prev = *(int*)stack->content;
+	stack = stack->next;
+	while (stack)
+	{
+		current = *(int*)stack->content;
+		if (prev > current)
+			return (0);
+		prev = current;
+		stack = stack->next;
+	}
+	return (1);
+}
 
 int	get_max_element(t_stack *head)
 {
@@ -64,51 +89,49 @@ void	order4(t_stack **head)
 
 	stack_b = NULL;
 	min = get_min_element(*head);
-	if (*(int*)(*head)->content == min)
-		pb(head, &stack_b);
-	else if (*(int*)(*head)->next->content == min)
-	{
+	if (*(int*)(*head)->next->content == min)
 		ra(head);
-		pb(head, &stack_b);
-	}
 	else if (*(int*)(*head)->next->next->content == min)
 	{
 		ra(head);
 		ra(head);
-		pb(head, &stack_b);
 	}
-	else
-	{
+	else if (*(int*)(*head)->next->next->next->content == min)
 		rra(head);
-		pb(head, &stack_b);
-	}
 	
+	if (is_ordered(*head))
+		return ;
+	pb(head, &stack_b);
 	order3(head);
-	
-	if (*(int*)stack_b->content < *(int*)(*head)->content)
-		pa(&stack_b, head);
-	else if (*(int*)stack_b->content < *(int*)(*head)->next->content)
-	{
-		pa(&stack_b, head);
-		sa(head);
-	}
-	else if (*(int*)stack_b->content < *(int*)(*head)->next->content)
-	{
-		rra(head);
-		pa(&stack_b, head);
-		ra(head);
-		ra(head);
-	}
-	else
-	{
-		pa(&stack_b, head);
-		ra(head);
-	}
+	pa(&stack_b, head);
 }
 
 void	order5(t_stack **head)
 {
-	*head = NULL;
+	t_stack *stack_b;
+	int min;
+
+	stack_b = NULL;
+	min = get_min_element(*head);
+	if (*(int*)(*head)->next->content == min)
+		ra(head);
+	else if (*(int*)(*head)->next->next->content == min)
+	{
+		ra(head);
+		ra(head);
+	}
+	else if (*(int*)(*head)->next->next->next->content == min)
+	{
+		rra(head);
+		rra(head);
+	}
+	else if (*(int*)(*head)->next->next->next->next->content == min)
+		rra(head);
+	if (is_ordered(*head))
+		return ;
+	pb(head, &stack_b);
+	order4(head);
+	pa(&stack_b, head);
 }
 
 void	manage_order(t_stack **stack, int argc)
