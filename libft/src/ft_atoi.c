@@ -13,6 +13,20 @@
 #include "../libft.h"
 #include <stdio.h>
 
+static long	get_number(const char *str, size_t *index, int *flag)
+{
+	long	number;
+
+	number = 0;
+	while (str[*index] >= '0' && str[*index] <= '9')
+	{
+		*flag = 1;
+		number = (number * 10) + (str[*index] - '0');
+		(*index)++;
+	}
+	return (number);
+}
+
 static int	is_space(char ch)
 {
 	if (ch == ' ' || ch == '\n' || ch == '\t')
@@ -49,14 +63,16 @@ int	ft_atoi(const char *str)
 
 int	ft_strict_atoi(const char *str, int *flag)
 {
-	int		count;
-	size_t	index;
-	int		sign;
+	long		count;
+	size_t		index;
+	int			sign;
+	int			changed;
 
 	sign = 1;
 	count = 0;
 	index = 0;
 	*flag = 0;
+	changed = 0;
 	while (is_space(str[index]))
 		index++;
 	if (str[index] == '+' || str[index] == '-')
@@ -65,12 +81,8 @@ int	ft_strict_atoi(const char *str, int *flag)
 			sign = -1;
 		index++;
 	}
-	while (str[index] >= '0' && str[index] <= '9')
-	{
-		count = (count * 10) + (str[index] - '0');
-		index++;
-	}
-	if (str[index])
+	count = get_number(str, &index, &changed);
+	if (str[index] || changed == 0 || count > INT_MAX || count < INT_MIN)
 		*flag = -1;
 	return (sign * count);
 }

@@ -41,7 +41,10 @@ LIBFT_FILES=	ft_memset.c		\
 			ft_putchar_fd.c	\
 			ft_putstr_fd.c	\
 			ft_putendl_fd.c	\
-			ft_putnbr_fd.c
+			ft_putnbr_fd.c	\
+			ft_strcmp.c		\
+			get_next_line.c \
+			get_next_line_utils.c
 LIBFT_OBJ=$(LIBFT_FILES:%.c=%.o)
 
 # Optional files (bonus part)
@@ -65,7 +68,7 @@ $(LIBFT_NAME): $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ)
 
 # It compiles all the .c files to .o if it is necessary
 %.o: $(SRC_FOLDER)/%.c
-	@$(CC) $(FLAGS) -c $<
+	$(CC) $(FLAGS) -c $<
 
 ##############################################################################
 

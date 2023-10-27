@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
 /**
  * @brief t_list
@@ -501,6 +502,20 @@ int		ft_lstsize(t_list *lst);
  * @return	The int value produced by interpreting the input characters
  *			as a number
  */
-int	ft_strict_atoi(const char *str, int *flag);
+int		ft_strict_atoi(const char *str, int *flag);
+
+int		ft_strcmp(const char *s1, const char *s2);
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 50
+# endif
+
+size_t	gnl_strlen(char *str);
+char	*gnl_cpy(char *data);
+int		gnl_find_ch(char *data, char ch);
+char	*add_line(char *data, char *add);
+void	*gnl_free(void **memory);
+
+char	*get_next_line(int fd);
 
 #endif
