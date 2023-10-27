@@ -6,50 +6,50 @@
 /*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 09:31:57 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/16 09:34:25 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:59:08 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <stdio.h>
 #include "../include/stack.h"
 
-void	sb(t_stack **stack_b)
+int	sb(t_stack **stack_b, int print)
 {
 	t_stack	*aux;
 
 	if (!stack_b || !(*stack_b) || !((*stack_b)->next))
-		return ;
-	
+		return (1);
 	aux = (*stack_b)->next;
 	(*stack_b)->next = aux->next;
 	aux->next = (*stack_b);
 	*stack_b = aux;
-	printf("sb\n");
+	if (print)
+		printf("sb\n");
+	return (1);
 }
 
-void	pb(t_stack **stack_a, t_stack **stack_b)
+int	pb(t_stack **stack_a, t_stack **stack_b, int print)
 {
 	t_stack	*node;
 
 	if (!stack_a || !(*stack_a) || !stack_b)
-		return ;
+		return (1);
 	node = (*stack_a);
 	*stack_a = (*stack_a)->next;
-
 	node->next = (*stack_b);
 	(*stack_b) = node;
-	printf("pb\n");
+	if (print)
+		printf("pb\n");
+	return (1);
 }
 
-void	rb(t_stack **stack_b)
+int	rb(t_stack **stack_b, int print)
 {
 	t_stack	*node;
 	t_stack	*current;
 
 	if (!stack_b || !(*stack_b) || !(*stack_b)->next)
-		return ;
-
+		return (1);
 	node = (*stack_b);
 	current = (*stack_b);
 	while (current->next)
@@ -57,21 +57,24 @@ void	rb(t_stack **stack_b)
 	current->next = node;
 	(*stack_b) = (*stack_b)->next;
 	node->next = NULL;
-	printf("rb\n");
+	if (print)
+		printf("rb\n");
+	return (1);
 }
 
-void	rrb(t_stack **stack_b)
+int	rrb(t_stack **stack_b, int print)
 {
 	t_stack	*node;
 
 	if (!stack_b || !(*stack_b) || !(*stack_b)->next)
-		return ;
-
+		return (1);
 	node = *stack_b;
 	while (node->next->next)
 		node = node->next;
 	node->next->next = (*stack_b);
 	(*stack_b) = node->next;
 	node->next = NULL;
-	printf("rrb\n");
+	if (print)
+		printf("rrb\n");
+	return (1);
 }
