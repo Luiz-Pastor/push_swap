@@ -1,10 +1,10 @@
 ##############################################################################
 NAME=push_swap
+CHECKER=checker
 ##############################################################################
 CC := cc
 FLAGS := -Wall -Werror -Wextra
 ##############################################################################
-LIB_FOLDER=lib
 LIBFT_FOLDER=libft
 LIBFT=$(LIBFT_FOLDER)/libft.a
 ##############################################################################
@@ -13,38 +13,49 @@ SRC=	main.c	\
 		instructions_a.c \
 		instructions_b.c \
 		order.c \
-		arguments.c
-
+		arguments.c \
+		utils.c
 OBJ=$(SRC:%.c=%.o)
+
+SRC_BONUS=	checker.c \
+			t_stack.c	\
+			instructions_a.c \
+			instructions_b.c \
+			order.c \
+			arguments.c \
+			utils.c
+OBJ_BONUS=$(SRC_BONUS:%.c=%.o)
 ##############################################################################
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): libft $(OBJ)
 	$(CC) $(OBJ) -o $(NAME) -Llibft/ -lft
 
+bonus: $(CHECKER)
+
+$(CHECKER): $(LIBFT) $(OBJ_BONUS)
+	$(CC) $(OBJ_BONUS) -o $(CHECKER) -Llibft/ -lft
 
 %.o: src/%.c
 	$(CC) $(FLAGS) -c $<
 
-$(LIBFT):
-	@echo "> Compiling 'libft'\n"
-	@make -C $(LIBFT_FOLDER)
-	@cp $(LIBFT_FOLDER)/libft.a $(LIB_FOLDER)
+libft:
+	@make -C $(LIBFT_FOLDER) all
+
 
 clean:
-	@rm -rf $(OBJ)
 	@make -C $(LIBFT_FOLDER) clean
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) $(CHECKER)
 	@make -C $(LIBFT_FOLDER) fclean
-	@rm -rf lib/libft.a
-
-test: $(NAME)
-	@cp $(NAME) tester
-	@cd tester; bash push_swap_test.sh
 
 re: fclean $(NAME)
 
 .PHONY: libft
+
+test: $(NAME)
+	clear;
+	@cp $(NAME) tester
+	@cd tester; bash push_swap_test.sh
