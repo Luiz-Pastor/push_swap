@@ -6,14 +6,13 @@
 /*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 08:30:32 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/17 09:40:22 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:08:59 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/stack.h"
 
 #include <stdio.h>
-
 
 t_stack	*ft_stacknew(void *content)
 {
@@ -24,6 +23,7 @@ t_stack	*ft_stacknew(void *content)
 		return (NULL);
 	memory->content = content;
 	memory->next = NULL;
+	memory->prev = NULL;
 	return (memory);
 }
 
@@ -61,6 +61,7 @@ void	ft_stackadd_back(t_stack **lst, t_stack *new)
 	while (current->next)
 		current = current->next;
 	current->next = new;
+	new->prev = current;
 }
 
 void	ft_stackadd_front(t_stack **lst, t_stack *new)
@@ -71,7 +72,22 @@ void	ft_stackadd_front(t_stack **lst, t_stack *new)
 	*lst = new;
 }
 
+int	ft_stacksize(t_stack *lst)
+{
+	int		count;
+	t_stack	*current;
 
+	count = 0;
+	if (!lst)
+		return (0);
+	current = lst;
+	while (current)
+	{
+		current = current->next;
+		count++;
+	}
+	return (count);
+}
 
 void	ft_stack_print(t_stack *stack, void (*print)(void*))
 {
