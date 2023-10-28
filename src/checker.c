@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 08:32:48 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/27 08:43:01 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/28 23:33:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "../include/instructions.h"
 #include "../include/arguments.h"
 #include "../libft/libft.h"
+
+#define FD_ERROR 2
 
 int	instr_a(char *buffer, t_stack **stack_a, t_stack **stack_b)
 {
@@ -53,20 +55,11 @@ int	do_instructions(char *buffer, t_stack **stack_a, t_stack **stack_b)
 	count += instr_a(buffer, stack_a, stack_b);
 	count += instr_b(buffer, stack_a, stack_b);
 	if (!strcmp(buffer, "ss\n"))
-	{
-		sa(stack_a, 0);
-		count += sb(stack_b, 0);
-	}
+		count += ss(stack_a, stack_b, 0);
 	if (!strcmp(buffer, "rr\n"))
-	{
-		ra(stack_a, 0);
-		count += rb(stack_b, 0);
-	}
+		count += rr(stack_a, stack_b, 0);
 	if (!strcmp(buffer, "rrr\n"))
-	{
-		rra(stack_a, 0);
-		count += rrb(stack_b, 0);
-	}
+		count += rrr(stack_a, stack_b, 0);
 	return (count);
 }
 
@@ -84,7 +77,7 @@ int	read_commands(t_stack **stack_a, t_stack **stack_b)
 			free(buffer);
 			ft_stackclear(stack_a, free);
 			ft_stackclear(stack_b, free);
-			return (fprintf(stderr, "Error\n"));
+			return (write(2, "Error\n", 6));
 		}
 		free(buffer);
 	}
@@ -97,18 +90,18 @@ int	main(int argc, char **argv)
 	t_stack	*stack_b;
 
 	if (argc < 2)
-		return (fprintf(stderr, "Error\n"), 1);
+		return (write(FD_ERROR, "Error\n", 6));
 	stack_a = manage_arguments(argc, argv);
 	if (!stack_a)
-		return (fprintf(stderr, "Error\n"), 1);
+		return (write(2, "Error\n", 6));
 	if (read_commands(&stack_a, &stack_b))
 		return (1);
 	if (ft_stacksize(stack_b) != 0)
-		printf("KO\n");
+		write(FD_ERROR, "KO\n", 3);
 	else if (!is_ordered(stack_a))
-		printf("KO\n");
+		write(FD_ERROR, "KO\n", 3);
 	else
-		printf("OK\n");
+		write(FD_ERROR, "OK\n", 3);
 	ft_stackclear(&stack_a, free);
 	ft_stackclear(&stack_b, free);
 	return (0);

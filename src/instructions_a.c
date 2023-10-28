@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   instructions_a.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:23:27 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/25 10:58:28 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/28 23:37:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 #include "../include/stack.h"
 
 int	sa(t_stack **stack_a, int print)
@@ -26,7 +26,7 @@ int	sa(t_stack **stack_a, int print)
 	(*stack_a)->prev = NULL;
 	(*stack_a)->next->prev = *stack_a;
 	if (print)
-		printf("sa\n");
+		write(1, "sa\n", 3);
 	return (1);
 }
 
@@ -41,7 +41,7 @@ int	pa(t_stack **stack_b, t_stack **stack_a, int print)
 	node->next = (*stack_a);
 	(*stack_a) = node;
 	if (print)
-		printf("pa\n");
+		write(1, "pa\n", 3);
 	return (1);
 }
 
@@ -62,7 +62,7 @@ int	ra(t_stack **stack_a, int print)
 	(*stack_a)->prev = NULL;
 	node->next = NULL;
 	if (print)
-		printf("ra\n");
+		write(1, "ra\n", 3);
 	return (1);
 }
 
@@ -80,6 +80,6 @@ int	rra(t_stack **stack_a, int print)
 	(*stack_a)->prev = NULL;
 	node->next = NULL;
 	if (print)
-		printf("rra\n");
+		write(1, "rra\n", 4);
 	return (1);
 }
