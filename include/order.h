@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   order.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 10:44:39 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/25 12:09:30 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:37:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,7 @@
 
 int		is_ordered(t_stack	*stack);
 void	manage_order(t_stack **stack);
+
+void	order3(t_stack **head);
 
 #endif
