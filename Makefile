@@ -12,18 +12,22 @@ SRC=	main.c	\
 		t_stack.c	\
 		instructions_a.c \
 		instructions_b.c \
+		instructions_both.c \
 		order.c \
 		arguments.c \
-		utils.c
+		utils.c \
+		algorithm.c
 OBJ=$(SRC:%.c=%.o)
 
 SRC_BONUS=	checker.c \
 			t_stack.c	\
 			instructions_a.c \
 			instructions_b.c \
+			instructions_both.c \
 			order.c \
 			arguments.c \
-			utils.c
+			utils.c \
+			algorithm.c
 OBJ_BONUS=$(SRC_BONUS:%.c=%.o)
 ##############################################################################
 
@@ -34,7 +38,7 @@ $(NAME): libft $(OBJ)
 
 bonus: $(CHECKER)
 
-$(CHECKER): $(LIBFT) $(OBJ_BONUS)
+$(CHECKER): libft $(OBJ_BONUS)
 	$(CC) $(OBJ_BONUS) -o $(CHECKER) -Llibft/ -lft
 
 %.o: src/%.c
@@ -45,6 +49,7 @@ libft:
 
 
 clean:
+	rm -rf $(OBJ) $(OBJ_BONUS)
 	@make -C $(LIBFT_FOLDER) clean
 
 fclean: clean
