@@ -3,22 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   order.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 08:07:44 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/27 08:16:45 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/28 23:37:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../include/stack.h"
 #include "../include/instructions.h"
 #include "../include/utils.h"
-
-/*static void int_print(void *elem)
-{
-	printf("%d", *(int*)elem);
-}*/
+#include "../include/algorithm.h"
 
 void	order3(t_stack **head)
 {
@@ -37,7 +32,7 @@ void	order4(t_stack **head)
 {
 	t_stack	*stack_b;
 	int		min;
-
+	
 	stack_b = NULL;
 	min = get_min_element(*head);
 	if (*(int *)(*head)->next->content == min)
@@ -100,6 +95,6 @@ void	manage_order(t_stack **stack)
 	else if (arguments == 5)
 		order5(stack);
 	else
-		return ;
+		algorithm(stack);
 	return ;
 }
