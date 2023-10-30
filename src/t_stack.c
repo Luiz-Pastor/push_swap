@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_stack.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 08:30:32 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/28 19:27:38 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/30 09:25:59 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/stack.h"
-
-#include <stdio.h>
+#include "../include/push_swap.h"
 
 t_stack	*ft_stacknew(void *content)
 {
@@ -26,7 +24,6 @@ t_stack	*ft_stacknew(void *content)
 	memory->target = -1;
 	memory->cost_a = -1;
 	memory->cost_b = -1;
-
 	memory->content = content;
 	memory->next = NULL;
 	memory->prev = NULL;
@@ -94,7 +91,7 @@ int	ft_stacksize(t_stack *lst)
 	}
 	return (count);
 }
-
+/*
 void	ft_stack_print(t_stack *stack, void (*print)(void*))
 {
 	size_t	count;
@@ -110,4 +107,4 @@ void	ft_stack_print(t_stack *stack, void (*print)(void*))
 		stack = stack->next;
 		count++;
 	}
-}
+}*/

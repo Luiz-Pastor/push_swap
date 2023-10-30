@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   instructions_a.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:23:27 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/28 23:37:43 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/30 09:25:33 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "../include/stack.h"
+#include "../include/push_swap.h"
 
 int	sa(t_stack **stack_a, int print)
 {

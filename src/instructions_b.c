@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   instructions_b.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 09:31:57 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/28 23:37:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/30 09:25:38 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "../include/stack.h"
+#include "../include/push_swap.h"
 
 int	sb(t_stack **stack_b, int print)
 {
@@ -78,6 +77,6 @@ int	rrb(t_stack **stack_b, int print)
 	(*stack_b) = node->next;
 	node->next = NULL;
 	if (print)
-		write(1, "rrb\n", 3);
+		write(1, "rrb\n", 4);
 	return (1);
 }

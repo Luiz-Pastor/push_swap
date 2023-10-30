@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 08:32:48 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/28 23:33:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/30 09:25:26 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "../include/push_swap.h"
 #include <string.h>
-#include "../include/order.h"
-#include "../include/stack.h"
-#include "../include/instructions.h"
-#include "../include/arguments.h"
-#include "../libft/libft.h"
 
 #define FD_ERROR 2
 

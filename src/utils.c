@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 08:11:19 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/28 23:36:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/30 09:26:04 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/utils.h"
+#include "../include/push_swap.h"
 
 int	is_ordered(t_stack	*stack)
 {
@@ -50,8 +50,8 @@ int	get_min_element(t_stack *head)
 int	get_min_index(t_stack *head)
 {
 	int	min;
-	int min_index;
-	int iterate_index;
+	int	min_index;
+	int	iterate_index;
 
 	min = *(int *)head->content;
 	min_index = 0;
@@ -98,7 +98,7 @@ void	*int_copy(int elem)
 
 void	*ft_charmatrix_free(char **elem)
 {
-	char **head;
+	char	**head;
 
 	if (!elem)
 		return (NULL);

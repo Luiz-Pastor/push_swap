@@ -3,36 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 08:30:32 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/28 23:37:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/30 09:25:43 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "../libft/libft.h"
-#include "../include/stack.h"
-#include "../include/instructions.h"
-#include "../include/order.h"
-#include "../include/arguments.h"
-#include "../include/utils.h"
+#include "../include/push_swap.h"
 
 #define FD_ERROR 2
 
-/* 
-- Salida de errores: 2
-*/
+void	check_values(t_stack *node, int *count)
+{
+	if (node)
+	{
+		node->pos_value = (*count);
+		(*count)++;
+	}
+}
 
 void	set_pos_val(t_stack *stack)
 {
 	const t_stack	*head = stack;
-	t_stack *iterator;
-	t_stack *smallest;
-	int count;
-	int min_content;
-	
+	t_stack			*iterator;
+	t_stack			*smallest;
+	int				count;
+	int				min_content;
+
 	count = 1;
 	while (stack)
 	{
@@ -48,11 +46,7 @@ void	set_pos_val(t_stack *stack)
 			}
 			iterator = iterator->next;
 		}
-		if (smallest)
-		{
-			smallest->pos_value = count;
-			count++;
-		}
+		check_values(smallest, &count);
 		stack = stack->next;
 	}
 }

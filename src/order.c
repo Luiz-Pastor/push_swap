@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   order.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 08:07:44 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/28 23:37:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/30 09:25:47 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/stack.h"
-#include "../include/instructions.h"
-#include "../include/utils.h"
-#include "../include/algorithm.h"
+#include "../include/push_swap.h"
 
 void	order3(t_stack **head)
 {
@@ -32,7 +29,7 @@ void	order4(t_stack **head)
 {
 	t_stack	*stack_b;
 	int		min;
-	
+
 	stack_b = NULL;
 	min = get_min_element(*head);
 	if (*(int *)(*head)->next->content == min)

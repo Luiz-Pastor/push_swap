@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:25:42 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/28 23:37:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/30 09:23:11 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/arguments.h"
-#include "../libft/libft.h"
-#include "../include/utils.h"
+#include "../include/push_swap.h"
 
 int	add_arguments(char *str, t_stack **head)
 {
@@ -82,7 +80,7 @@ static t_stack	*split_arguments(char *argv)
 	head = ft_stacknew(element);
 	if (!head || !element || flag < 0)
 	{
-		if (element)
+		if (!head && element)
 			free(element);
 		return (ft_charmatrix_free(arguments), ft_stackclear(&head, free), NULL);
 	}
@@ -95,15 +93,6 @@ static t_stack	*split_arguments(char *argv)
 	return (check_repeated(head));
 }
 
-		/*element = int_copy(ft_strict_atoi(argv[index], &flag));
-		node = ft_stacknew(element);
-		if (!node || !element || flag < 0)
-		{
-			if (element)
-				free(element);
-			return (ft_stackclear(&head, NULL), NULL);
-		}
-		ft_stackadd_back(&head, node);*/
 static t_stack	*get_stack(int argc, char **argv)
 {
 	int		index;
@@ -116,7 +105,7 @@ static t_stack	*get_stack(int argc, char **argv)
 	head = ft_stacknew(element);
 	if (!head || !element || flag < 0)
 	{
-		if (element)
+		if (!head && element)
 			free(element);
 		return (ft_stackclear(&head, free), NULL);
 	}
