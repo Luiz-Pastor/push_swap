@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:25:42 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 09:23:11 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/30 23:08:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_stack	*check_repeated(t_stack *head)
 		node_cmp = node_current->next;
 		while (node_cmp)
 		{
-			if (*(int *)node_current->content == *(int *) node_cmp->content)
+			if (*node_current->content == *node_cmp->content)
 			{
 				ft_stackclear(&head, free);
 				return (NULL);
@@ -55,15 +55,6 @@ static t_stack	*check_repeated(t_stack *head)
 	return (head);
 }
 
-		/*element = int_copy(ft_strict_atoi(arguments[index], &flag));
-		node = ft_stacknew(element);
-		if (!node || !element || flag < 0)
-		{
-			if (element)
-				free(element);
-			return (ft_stackclear(&head, NULL), NULL);
-		}
-		ft_stackadd_back(&head, node);*/
 static t_stack	*split_arguments(char *argv)
 {
 	int		*element;
@@ -75,21 +66,21 @@ static t_stack	*split_arguments(char *argv)
 	index = 0;
 	arguments = ft_split(argv, ' ');
 	if (!arguments || !arguments[0])
-		return (ft_charmatrix_free(arguments));
+		return (ft_matrix_free(arguments));
 	element = int_copy(ft_strict_atoi(arguments[0], &flag));
 	head = ft_stacknew(element);
 	if (!head || !element || flag < 0)
 	{
 		if (!head && element)
 			free(element);
-		return (ft_charmatrix_free(arguments), ft_stackclear(&head, free), NULL);
+		return (ft_matrix_free(arguments), ft_stackclear(&head, free), NULL);
 	}
 	while (arguments[++index])
 	{
 		if (add_arguments(arguments[index], &head))
-			return (ft_charmatrix_free(arguments), NULL);
+			return (ft_matrix_free(arguments), NULL);
 	}
-	ft_charmatrix_free(arguments);
+	ft_matrix_free(arguments);
 	return (check_repeated(head));
 }
 

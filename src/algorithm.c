@@ -23,7 +23,7 @@ static void	push_init(t_stack **stack_a, t_stack **stack_b)
 	i = 0;
 	while (stack_size > 6 && i < stack_size && pushes < stack_size / 2)
 	{
-		if ((*stack_a)->pos_value <= stack_size / 2)
+		if ((*stack_a)->value <= stack_size / 2)
 		{
 			pb(stack_a, stack_b, 1);
 			pushes++;
@@ -59,10 +59,11 @@ void	move_min(t_stack **stack)
 			rra(stack, 1);
 	}
 }
-#include <stdio.h>
+
 void	algorithm(t_stack **stack_a)
 {
 	t_stack	*stack_b;
+
 	stack_b = NULL;
 	push_init(stack_a, &stack_b);
 	order3(stack_a);

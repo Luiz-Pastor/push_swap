@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 08:32:48 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 09:25:26 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/30 23:41:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include <string.h>
-
-#define FD_ERROR 2
 
 int	instr_a(char *buffer, t_stack **stack_a, t_stack **stack_b)
 {
@@ -88,14 +86,15 @@ int	main(int argc, char **argv)
 	stack_a = manage_arguments(argc, argv);
 	if (!stack_a)
 		return (write(2, "Error\n", 6));
+	stack_b = NULL;
 	if (read_commands(&stack_a, &stack_b))
 		return (1);
 	if (ft_stacksize(stack_b) != 0)
-		write(FD_ERROR, "KO\n", 3);
+		write(1, "KO\n", 3);
 	else if (!is_ordered(stack_a))
-		write(FD_ERROR, "KO\n", 3);
+		write(1, "KO\n", 3);
 	else
-		write(FD_ERROR, "OK\n", 3);
+		write(1, "OK\n", 3);
 	ft_stackclear(&stack_a, free);
 	ft_stackclear(&stack_b, free);
 	return (0);

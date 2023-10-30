@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 08:30:32 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 09:25:43 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/30 23:34:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-#define FD_ERROR 2
-
 void	check_values(t_stack *node, int *count)
 {
 	if (node)
 	{
-		node->pos_value = (*count);
+		node->value = (*count);
 		(*count)++;
 	}
 }
@@ -39,10 +37,10 @@ void	set_pos_val(t_stack *stack)
 		smallest = NULL;
 		while (iterator)
 		{
-			if (iterator->pos_value == -1 && *(int *)iterator->content < min_content)
+			if (iterator->value == -1 && *iterator->content < min_content)
 			{
 				smallest = iterator;
-				min_content = *(int *)iterator->content;
+				min_content = *iterator->content;
 			}
 			iterator = iterator->next;
 		}

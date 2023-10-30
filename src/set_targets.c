@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_targets.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:04:50 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 11:05:16 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/30 22:48:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ void	set_position(t_stack *stack)
 	}
 }
 
-int	get_target(t_stack **stack_a, int pos_value, int target_s, int target)
+int	get_target(t_stack **stack_a, int value, int target_s, int target)
 {
 	t_stack	*aux_stack;
 
 	aux_stack = *stack_a;
 	while (aux_stack)
 	{
-		if (aux_stack->pos_value > pos_value && aux_stack->pos_value < target_s)
+		if (aux_stack->value > value && aux_stack->value < target_s)
 		{
-			target_s = aux_stack->pos_value;
+			target_s = aux_stack->value;
 			target = aux_stack->index;
 		}
 		aux_stack = aux_stack->next;
@@ -44,9 +44,9 @@ int	get_target(t_stack **stack_a, int pos_value, int target_s, int target)
 	aux_stack = *stack_a;
 	while (aux_stack)
 	{
-		if (aux_stack->pos_value < target_s)
+		if (aux_stack->value < target_s)
 		{
-			target_s = aux_stack->pos_value;
+			target_s = aux_stack->value;
 			target = aux_stack->index;
 		}
 		aux_stack = aux_stack->next;
@@ -65,7 +65,7 @@ void	get_target_position(t_stack **stack_a, t_stack **stack_b)
 	set_position(*stack_b);
 	while (iterate_b)
 	{
-		objective = get_target(stack_a, iterate_b->pos_value, INT_MAX, objective);
+		objective = get_target(stack_a, iterate_b->value, INT_MAX, objective);
 		iterate_b->target = objective;
 		iterate_b = iterate_b->next;
 	}

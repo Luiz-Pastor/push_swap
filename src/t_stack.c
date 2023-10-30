@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_stack.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 08:30:32 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 09:25:59 by lpastor-         ###   ########.fr       */
+/*   Updated: 2023/10/30 22:48:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_stack	*ft_stacknew(void *content)
 	if (!memory)
 		return (NULL);
 	memory->index = -1;
-	memory->pos_value = -1;
+	memory->value = -1;
 	memory->target = -1;
 	memory->cost_a = -1;
 	memory->cost_b = -1;
@@ -103,7 +103,7 @@ void	ft_stack_print(t_stack *stack, void (*print)(void*))
 	{
 		printf("(Node %zu): ", count);
 		print(stack->content);
-		printf(" (%d)(%d)(%d)\n", stack->index, stack->pos_value, stack->target);
+		printf(" (%d)(%d)(%d)\n", stack->index, stack->value, stack->target);
 		stack = stack->next;
 		count++;
 	}
