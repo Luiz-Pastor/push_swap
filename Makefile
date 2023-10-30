@@ -14,6 +14,7 @@ SRC=	main.c	\
 		order.c \
 		arguments.c \
 		utils.c \
+		utils_find.c \
 		algorithm.c \
 		best_move.c \
 		check_cost.c \
@@ -32,6 +33,7 @@ SRC_BONUS=	checker.c \
 			instructions_both.c \
 			arguments.c \
 			utils.c \
+			utils_find.c \
 			ft_split.c \
 			ft_strcmp.c \
 			ft_strict_atoi.c \
@@ -54,7 +56,7 @@ $(CHECKER): $(OBJ_BONUS)
 	$(CC) $(FLAGS) -c $<
 
 clean:
-	rm -rf $(OBJ) $(OBJ_BONUS)
+	@rm -rf $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
 	@rm -rf $(NAME) $(CHECKER)
