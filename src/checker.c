@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 08:32:48 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 23:41:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/31 08:07:12 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 
 int	instr_a(char *buffer, t_stack **stack_a, t_stack **stack_b)
 {
-	if (!strcmp(buffer, "sa\n"))
+	if (!ft_strcmp(buffer, "sa\n"))
 		return (sa(stack_a, 0));
-	if (!strcmp(buffer, "pa\n"))
+	if (!ft_strcmp(buffer, "pa\n"))
 		return (pa(stack_b, stack_a, 0));
-	if (!strcmp(buffer, "ra\n"))
+	if (!ft_strcmp(buffer, "ra\n"))
 		return (ra(stack_a, 0));
-	if (!strcmp(buffer, "rra\n"))
+	if (!ft_strcmp(buffer, "rra\n"))
 		return (rra(stack_a, 0));
 	return (0);
 }
 
 int	instr_b(char *buffer, t_stack **stack_a, t_stack **stack_b)
 {
-	if (!strcmp(buffer, "sb\n"))
+	if (!ft_strcmp(buffer, "sb\n"))
 		return (sb(stack_b, 0));
-	if (!strcmp(buffer, "pb\n"))
+	if (!ft_strcmp(buffer, "pb\n"))
 		return (pb(stack_a, stack_b, 0));
-	if (!strcmp(buffer, "rb\n"))
+	if (!ft_strcmp(buffer, "rb\n"))
 		return (rb(stack_b, 0));
-	if (!strcmp(buffer, "rrb\n"))
+	if (!ft_strcmp(buffer, "rrb\n"))
 		return (rrb(stack_b, 0));
 	return (0);
 }
@@ -46,11 +46,11 @@ int	do_instructions(char *buffer, t_stack **stack_a, t_stack **stack_b)
 	count = 0;
 	count += instr_a(buffer, stack_a, stack_b);
 	count += instr_b(buffer, stack_a, stack_b);
-	if (!strcmp(buffer, "ss\n"))
+	if (!ft_strcmp(buffer, "ss\n"))
 		count += ss(stack_a, stack_b, 0);
-	if (!strcmp(buffer, "rr\n"))
+	if (!ft_strcmp(buffer, "rr\n"))
 		count += rr(stack_a, stack_b, 0);
-	if (!strcmp(buffer, "rrr\n"))
+	if (!ft_strcmp(buffer, "rrr\n"))
 		count += rrr(stack_a, stack_b, 0);
 	return (count);
 }

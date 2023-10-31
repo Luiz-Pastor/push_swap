@@ -3,76 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   best_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:02:00 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 23:40:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/31 08:05:44 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	db_op(t_stack **stack_a, t_stack **stack_b, int *cost_a, int *cost_b)
+void	db_op(t_stack **stack_a, t_stack **stack_b, int *mv_sa, int *mv_sb)
 {
-	if ((*cost_a) > 0 && (*cost_b) > 0)
+	if ((*mv_sa) > 0 && (*mv_sb) > 0)
 	{
-		while ((*cost_a) > 0 && (*cost_b) > 0)
+		while ((*mv_sa) > 0 && (*mv_sb) > 0)
 		{
-			(*cost_a)--;
-			(*cost_b)--;
+			(*mv_sa)--;
+			(*mv_sb)--;
 			rr(stack_a, stack_b, 1);
 		}
 	}
-	else if ((*cost_a) < 0 && (*cost_b) < 0)
+	else if ((*mv_sa) < 0 && (*mv_sb) < 0)
 	{
-		while ((*cost_a) < 0 && (*cost_b) < 0)
+		while ((*mv_sa) < 0 && (*mv_sb) < 0)
 		{
-			(*cost_a)++;
-			(*cost_b)++;
+			(*mv_sa)++;
+			(*mv_sb)++;
 			rrr(stack_a, stack_b, 1);
 		}
 	}
 }
 
-void	sg_a_op(t_stack **stack_a, int *cost_a)
+void	sg_a_op(t_stack **stack_a, int *mv_sa)
 {
-	while ((*cost_a))
+	while ((*mv_sa))
 	{
-		if ((*cost_a) > 0)
+		if ((*mv_sa) > 0)
 		{
 			ra(stack_a, 1);
-			(*cost_a)--;
+			(*mv_sa)--;
 		}
-		else if ((*cost_a) < 0)
+		else if ((*mv_sa) < 0)
 		{
 			rra(stack_a, 1);
-			(*cost_a)++;
+			(*mv_sa)++;
 		}
 	}
 }
 
-void	sg_op(t_stack **stack_a, t_stack **stack_b, int *cost_a, int *cost_b)
+void	sg_op(t_stack **stack_a, t_stack **stack_b, int *mv_sa, int *mv_sb)
 {
-	while ((*cost_b))
+	while ((*mv_sb))
 	{
-		if ((*cost_b) > 0)
+		if ((*mv_sb) > 0)
 		{
 			rb(stack_b, 1);
-			(*cost_b)--;
+			(*mv_sb)--;
 		}
-		else if ((*cost_b) < 0)
+		else if ((*mv_sb) < 0)
 		{
 			rrb(stack_b, 1);
-			(*cost_b)++;
+			(*mv_sb)++;
 		}
 	}
-	sg_a_op(stack_a, cost_a);
+	sg_a_op(stack_a, mv_sa);
 }
 
-void	do_move(t_stack **stack_a, t_stack **stack_b, int cost_a, int cost_b)
+void	do_move(t_stack **stack_a, t_stack **stack_b, int mv_sa, int mv_sb)
 {
-	db_op(stack_a, stack_b, &cost_a, &cost_b);
-	sg_op(stack_a, stack_b, &cost_a, &cost_b);
+	db_op(stack_a, stack_b, &mv_sa, &mv_sb);
+	sg_op(stack_a, stack_b, &mv_sa, &mv_sb);
 	pa(stack_b, stack_a, 1);
 }
 
@@ -80,20 +80,20 @@ void	best_move(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*aux_b;
 	int		best;
-	int		aux_cost_a;
-	int		aux_cost_b;
+	int		aux_mv_sa;
+	int		aux_mv_sb;
 
 	aux_b = *stack_b;
 	best = INT_MAX;
 	while (aux_b)
 	{
-		if (ft_abs(aux_b->cost_a) + ft_abs(aux_b->cost_b) < best)
+		if (ft_abs(aux_b->mv_sa) + ft_abs(aux_b->mv_sb) < best)
 		{
-			best = ft_abs(aux_b->cost_a) + ft_abs(aux_b->cost_b);
-			aux_cost_a = aux_b->cost_a;
-			aux_cost_b = aux_b->cost_b;
+			best = ft_abs(aux_b->mv_sa) + ft_abs(aux_b->mv_sb);
+			aux_mv_sa = aux_b->mv_sa;
+			aux_mv_sb = aux_b->mv_sb;
 		}
 		aux_b = aux_b->next;
 	}
-	do_move(stack_a, stack_b, aux_cost_a, aux_cost_b);
+	do_move(stack_a, stack_b, aux_mv_sa, aux_mv_sb);
 }

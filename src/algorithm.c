@@ -70,7 +70,7 @@ void	algorithm(t_stack **stack_a)
 	while (stack_b)
 	{
 		get_target_position(stack_a, &stack_b);
-		check_cost(stack_a, &stack_b);
+		get_movements_cost(stack_a, &stack_b);
 		best_move(stack_a, &stack_b);
 	}
 	if (!is_ordered(*stack_a))

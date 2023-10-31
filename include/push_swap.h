@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 09:06:30 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 23:34:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/31 08:15:38 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_stack {
 	int				index;
 	int				value;
 	int				target;
-	int				cost_a;
-	int				cost_b;
+	int				mv_sa;
+	int				mv_sb;
 
 	int				*content;
 	struct s_stack	*next;
@@ -81,7 +81,7 @@ char	*add_line(char *data, char *add);
 char	*get_next_line(int fd);
 
 void	get_target_position(t_stack **stack_a, t_stack **stack_b);
-void	check_cost(t_stack **stack_a, t_stack **stack_b);
+void	get_movements_cost(t_stack **stack_a, t_stack **stack_b);
 void	best_move(t_stack **stack_a, t_stack **stack_b);
 
 #endif

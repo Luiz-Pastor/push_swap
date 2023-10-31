@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_stack.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 08:30:32 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 22:48:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/31 08:11:40 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_stack	*ft_stacknew(void *content)
 	memory->index = -1;
 	memory->value = -1;
 	memory->target = -1;
-	memory->cost_a = -1;
-	memory->cost_b = -1;
-	memory->content = content;
+	memory->mv_sa = -1;
+	memory->mv_sb = -1;
+	memory->content = (int *)content;
 	memory->next = NULL;
 	memory->prev = NULL;
 	return (memory);
@@ -91,20 +91,3 @@ int	ft_stacksize(t_stack *lst)
 	}
 	return (count);
 }
-/*
-void	ft_stack_print(t_stack *stack, void (*print)(void*))
-{
-	size_t	count;
-
-	if (!stack | !print)
-		return ;
-	count = 0;
-	while (stack)
-	{
-		printf("(Node %zu): ", count);
-		print(stack->content);
-		printf(" (%d)(%d)(%d)\n", stack->index, stack->value, stack->target);
-		stack = stack->next;
-		count++;
-	}
-}*/
