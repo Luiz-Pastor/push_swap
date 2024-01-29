@@ -6,7 +6,7 @@
 /*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 09:26:47 by lpastor-          #+#    #+#             */
-/*   Updated: 2023/10/30 09:28:05 by lpastor-         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:14:32 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_strict_atoi(const char *str, int *flag)
 		index++;
 	}
 	count = get_number(str, &index, &changed);
-	if (str[index] || changed == 0 || count > INT_MAX || count < INT_MIN)
+	if (str[index] || changed == 0 || count > INT_MAX || -count < INT_MIN)
 		*flag = -1;
 	return (sign * count);
 }
